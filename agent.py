@@ -28,7 +28,7 @@ class iverilogTool(BaseTool):
        
         self.binary_path = './iverilog/bin/iverilog'
         try:
-          
+            print(params)
             command = [self.binary_path] + json.loads(params)['arguments']
             print(command)
   
@@ -41,7 +41,7 @@ class iverilogTool(BaseTool):
 
 
 tools = ['iverilog', 'code_interpreter']  # `code_interpreter` is a built-in tool for executing code.
-files = ['/data/zhma/iverilog_quickstart.pdf']  # Give the bot a PDF file to read.
+files = ['./iverilog_guide.pdf']  # Give the bot a PDF file to read.
     
     
 def app_gui():
@@ -49,8 +49,8 @@ def app_gui():
     bot = Assistant(llm={ 'model': 'gpt-4o-mini','model_server': ' https://api.openai.com/v1',
         'api_key': 'your key',},
                     name='iverilog LLM-Agent',
-                    #function_list=tools,
-                #files=files,
+                    function_list=tools,
+                files=files,
                     description='自动调用iverilog工具')
     chatbot_config = {
         'prompt.suggestions': [

@@ -1,0 +1,305 @@
+[
+  {
+    "page_num": 1,
+    "content": [
+      {
+        "text": "Icarus Verilog + GTKWave Guide\nwith support for MIPS architecture implementation\n BY IOANNIS KONSTADELIAS <ikonstadel@gmail.com>\n",
+        "font-size": 12,
+        "token": 34
+      },
+      {
+        "text": "Introduction\n",
+        "font-size": 14,
+        "token": 2
+      },
+      {
+        "text": "Here is a guide for those who want to develop and test hardware on Linux OS. The positives of\nworking/developing on Linux is that you don't have to work on Windows and thus in most cases\nyou can have everything for free. The most important thing is that you have everything open source.\nNoone restricts you from using something that already exists, in the way you want. That's the main\nreason I prefer solutions in Linux like that than examples like ModelSim. They are ok, but they\nrestict me.\n",
+        "font-size": 12,
+        "token": 110
+      },
+      {
+        "text": "This guide isn't supposed to include every little detail of either Icarus Verilog or GTKWave, but the\nthings you have to do to use some extra functionality that probably you haven't in mind to use or\nyou couldn't know how to do it because of lack of support on the Internet. The main goal of this\nguide is to show you how to view in GTKWave the values of the signals of your program in a more\nhuman way. In a way that will help you a lot with debugging. In a way such the image below:\n Let's get it started!\n",
+        "font-size": 12,
+        "token": 120
+      }
+    ]
+  },
+  {
+    "page_num": 2,
+    "content": [
+      {
+        "text": "Icarus Verilog\n",
+        "font-size": 14,
+        "token": 6
+      },
+      {
+        "text": "About\n",
+        "font-size": 12,
+        "token": 2
+      },
+      {
+        "text": "Icarus Verilog is a free Verilog simulation and synthesis tool. It compiles source code written in\nVerilog (IEEE-1364) into some target format. It also generates netlists for the synthesis part. It's by\nfar the best free tool and many people work on that making it more and more complete day by day.\n",
+        "font-size": 12,
+        "token": 73
+      },
+      {
+        "text": "Well, because I use Ubuntu (and specifically 13.10, which doesn't mean anything for the whole\nguide), I'll show you everything with commands for that OS.\n Installation\n Open a terminal and type (or copy-paste) the below commands.\n Firstly, add a new ppa:\n  $ sudo add­apt­repository ppa:team­electronics/ppa\n Then, update the local repository cache:\n  $ sudo apt­get update\n Finally, install (update) the Icarus Verilog package\n  $ sudo apt­get install iverilog\n Usage\n  $ iverilog one.v two.v\n In that way, a.out is created and that's our binary:\n  $ ls\n  $ a.out one.v two.v\n Now we can execute a.out with vvp command:\n  $ vvp a.out\n If you want to specify another name for the binary, you can use the ­o option just like in gcc:\n  $ iverilog ­o my_out.out one.v two.v\n  $ ls\n  $ one.v two.v my_out.v\n",
+        "font-size": 12,
+        "token": 265
+      },
+      {
+        "table": "|$ ls|\n|$ a.out one.v two.v|",
+        "token": 11
+      },
+      {
+        "table": "|$ iverilog ­o my_out.out one.v two.v|\n|$ ls|\n|$ one.v two.v my_out.v|",
+        "token": 26
+      }
+    ]
+  },
+  {
+    "page_num": 3,
+    "content": [
+      {
+        "text": "Well, all these are ok, but if you want to write on big, or complex verilog code, you should also use\nduring the compilation the ­Wall option:\n  $ iverilog ­Wall ­o my_out.out one.v two.v\n",
+        "font-size": 12,
+        "token": 58
+      },
+      {
+        "text": "­Wall option works in the same logic as in gcc. It enables more warnings during the compilation,\nthat can help you find that little thing that destroys the functionality of your hardware. And yes,\nwarnings in our case can affect the functionality of our design more often than programming in C.\nSo ­Wall is a must. You should also consider on ­Winfloop. You can imagine its usage.\n",
+        "font-size": 12,
+        "token": 80
+      },
+      {
+        "text": "Well, that's all from me about Icarus Verilog. If you want to learn more about it, you should visit it's\nofficial website at http://iverilog.icarus.com/ and for further How Tos and support its official wiki at\nhttp://iverilog.wikia.com/wiki/Main_Page. I also recommend you to subscribe to the mailing list\nhttps://lists.sourceforge.net/lists/listinfo/iverilog-devel.\n",
+        "font-size": 12,
+        "token": 87
+      },
+      {
+        "table": "||\n||\n|Well, all these are ok, but if you want to write on big, or complex verilog code, you should also use during the compilation the ­Wall option:|",
+        "token": 38
+      },
+      {
+        "table": "||\n|­Wall option works in the same logic as in gcc. It enables more warnings during the compilation, that can help you find that little thing that destroys the functionality of your hardware. And yes, warnings in our case can affect the functionality of our design more often than programming in C. So ­Wall is a must. You should also consider on ­Winfloop. You can imagine its usage.|\n||\n|Well, that's all from me about Icarus Verilog. If you want to learn more about it, you should visit it's official website at http://iverilog.icarus.com/ and for further How Tos and support its official wiki at http://iverilog.wikia.com/wiki/Main_Page. I also recommend you to subscribe to the mailing list https://lists.sourceforge.net/lists/listinfo/iverilog-devel.|\n||",
+        "token": 171
+      }
+    ]
+  },
+  {
+    "page_num": 4,
+    "content": [
+      {
+        "text": "GTKWave\n",
+        "font-size": 14,
+        "token": 3
+      },
+      {
+        "text": "About\n",
+        "font-size": 12,
+        "token": 2
+      },
+      {
+        "text": "GTKWave is a fully featured GTK+ wave viewer for Unix, Win32, and Mac OSX which reads\nLXT, LXT2, VZT, FST, and GHW files as well as standard Verilog VCD/EVCD files and allows\ntheir viewing. Its official website is at http://gtkwave.sourceforge.net/.\n",
+        "font-size": 12,
+        "token": 72
+      },
+      {
+        "text": "GTKWave   is   the   best   free   wave   viewer   and   is   the   recommended   viewer   by   Icarus   Verilog\ndeveloper.\n Installation\n Open a terminal and type (or copy-paste) the below commands.\n Firstly, update the local repository cache:\n  $ sudo apt­get update\n Finally, install (update) the GTKWave package\n  $ sudo apt­get install gtkwave\n Usage\n",
+        "font-size": 12,
+        "token": 102
+      },
+      {
+        "text": "It's usage it's really easy. In order to open GTKWave you can either type gtkwave in terminal, or by\nclicking on its icon:\n",
+        "font-size": 12,
+        "token": 32
+      },
+      {
+        "text": "As you can imagine, there's nothing you can do by simply opening it alone. In order to see some\nwaveform, you must open through GTKWave some saved dumpfiles. In our case we will use .vcd\nfiles, which are produced for our Icarus Verilog tool.\n Creation of .vcd files\n In our verilog code in an initial block we should include these two lines:\n module Test; \n ... \n initial begin\n $dumpfile(\"my_dumpfile.vcd\"); \n $dumpvars(0, my_module_name);\n end\n ...\n endmodule\n",
+        "font-size": 12,
+        "token": 123
+      },
+      {
+        "table": "|module Test;|\n|...|\n|initial begin|\n|$dumpfile(\"my_dumpfile.vcd\");|\n|$dumpvars(0, my_module_name);|\n|end|\n|...|\n|endmodule|",
+        "token": 44
+      }
+    ]
+  },
+  {
+    "page_num": 5,
+    "content": [
+      {
+        "text": "NOTE: In case you have defined arrays in our design. E.g.:\n module Mem (bla, bla, bla, …);\n ...\n reg [M:0] data [N:0];\n …\n endmodule\n module Test; \n integer i;\n ... \n initial begin\n $dumpfile(\"my_dumpfile.vcd\"); \n $dumpvars(0, my_module_name);\n for(i = 0; i < M; i = i + 1)\n $dumpvars(1, full.path.to.array.data[i]);\n end\n ...\n endmodule\n",
+        "font-size": 12,
+        "token": 133
+      },
+      {
+        "text": "It's probable that the last action will result a Warning type like that below during the compilation.\nYou don't need to worry:\n",
+        "font-size": 12,
+        "token": 26
+      },
+      {
+        "text": "VCD  warning:  array  word  cpu_tb.cpu0.cpu_dp.data_mem.data[39]   will\nconflict with an escaped identifier.\n Opening VCD files with GTKWave\n",
+        "font-size": 12,
+        "token": 46
+      },
+      {
+        "text": "You can open o VCD file either from terminal or by the GUI. In this guide I'll use as much as I can\nthe terminal way. It's more catchy and for sure it'll save as useful time, especially when we test a\nhardware design. So here we go:\n  $ gtkwave my_dumpfile.vcd\n",
+        "font-size": 12,
+        "token": 73
+      },
+      {
+        "table": "|module Mem (bla, bla, bla, …);|\n|...|\n|reg [M:0] data [N:0];|\n|…|\n|endmodule|",
+        "token": 37
+      },
+      {
+        "table": "|module Test;|\n|integer i;|\n|...|\n|initial begin|\n|$dumpfile(\"my_dumpfile.vcd\");|\n|$dumpvars(0, my_module_name);|\n|for(i = 0; i < M; i = i + 1)|\n|$dumpvars(1, full.path.to.array.data[i]);|\n|end|\n|...|\n|endmodule|",
+        "token": 82
+      }
+    ]
+  },
+  {
+    "page_num": 6,
+    "content": [
+      {
+        "text": "As you can see, there aren't any waves in the Wave window. That's because the user has to choose\nwhich signals want to see. In order to choose the signal you want to see, you should go in the left\nwindow with the SST name. Here you can see your hardware hierarchy. By clicking the + of every\ninstance, you can see the signals that are related with that instance. Then you can drag&drop them,\nor copy&paste them in the Signals window. Voilà! Here are the waveforms.\n",
+        "font-size": 12,
+        "token": 111
+      },
+      {
+        "text": "NOTE: When I close and re-open GTKWave with the same VCD file, the signals that I have chosen\nbefore are lost. Should I always spend all this time by only inserting signals to be shown?\n",
+        "font-size": 12,
+        "token": 43
+      },
+      {
+        "text": "The answer is “of course not!”. After you have decided on the signals you want to be shown you\ncan click File → Write Save File As and save a file with a .gtkw ending. Let's say for this example\nconfig.gtkw. From now and then you can open it with your .vcd file and get instantly to the point,\nwhich is debugging ;) :\n  $ gtkwave my_dumpfile.vcd config.gtkw\n A better view on things\n",
+        "font-size": 12,
+        "token": 105
+      },
+      {
+        "text": "Now you are able to see the values of the signals in a faster way. But how about the interpretation?\nThe values of the signals are in hexadecimal format and all waves are colored green. Yes! You can\nchange these properties.\n All crystal clear until now...\n Take GTKWave by your side\n",
+        "font-size": 12,
+        "token": 60
+      },
+      {
+        "text": "When you right-click on a signal and especially in the Data Format option you can see the choice\nTranslate Filter File. We'll stick with that option for the rest of this guide. It's a very powerful\noption, but it goes by the most times as there's not there.\n",
+        "font-size": 12,
+        "token": 58
+      },
+      {
+        "text": "With that option you can translate the values of the signals in a more human way. You can do this\nby writing a .txt translation filter. It isn't as complex as it sounds. Let's see an example:\n",
+        "font-size": 12,
+        "token": 45
+      },
+      {
+        "text": "You   write   a   MIPS   processor   in   Verilog.   You   have   a   Register   File   with   the   register   of   this\narchitecture. You don't want to see the names of them as hex numbers, even as decimal. So you can\nsimply write a .txt file like this:\n 00\n 01\n 02\n $0 ­ $zero \n $1 ­ $at \n $2 ­ $v0 \n ... \n",
+        "font-size": 12,
+        "token": 108
+      },
+      {
+        "table": "|00 $0 ­ $zero|\n|01 $1 ­ $at|\n|02 $2 ­ $v0|\n|...|",
+        "token": 31
+      }
+    ]
+  },
+  {
+    "page_num": 7,
+    "content": [
+      {
+        "text": "The first column represents the hexadecimal values that a signal that represents registers can have.\nThe second more complex column is what we want to see instead of the first column. And that's it!.\nNow we only have to go to the signal we want to change, right-click on it, choose Data Format →\nTranslate Filter File → Enable and Select. Then you have to browse to the filter you wrote,\nchoose it and hit OK. Voilà! (Make sure that the data format is in hex before you choose the filter).\nNow you can save again your configuration. You're ready to go!\n",
+        "font-size": 12,
+        "token": 122
+      },
+      {
+        "text": "In   that   way   you   can   filter   whatever   you   want.   From   registers'   names   and   opcodes   to   full\ninstructions! Full instructions???\n",
+        "font-size": 12,
+        "token": 41
+      },
+      {
+        "text": "Supposing that we talk about a MIPS implementation, we initialize the Instruction Memory array\nwith the verilog command $readmemb() from a file. This file must be of such format:\n @0    000000_01000_00100_01001_00000_100000  // add  $t1, $t0, $a0\n @4    101011_01011_01001_0000000000000101    // sw   $t1, 5($t3) \n @8    100011_01011_10010_0000000000000101    // lw   $s2, 5($t3) \n @c    000000_01000_10011_01001_00000_101010  // slt  $t1, $t0, $s3\n @10   000100_01001_10010_1111111111111011    // beq  $t1, $s2, ­5\n",
+        "font-size": 12,
+        "token": 328
+      },
+      {
+        "text": "where the first column is the address in hex of the command (in MIPS every address takes 32 bits)\nand the second column is the binary representation of the MIPS assembly instruction. You can\ninclude some C++ style comments if you like to.\n This special command is used like that in an initial block:\n $readmemb(\"program.mbin\", full.path.to.data);\n Before we continue with my favorite part, let's make our life a lot easier.\n Makefile: Our best friend\n",
+        "font-size": 12,
+        "token": 102
+      },
+      {
+        "text": "Let's create a simple make file with what we saw up to here. The scenario is that we have a design\nin Verilog and we want to run it and see the waveforms instantly, without touching the mouse at all:\n",
+        "font-size": 12,
+        "token": 47
+      },
+      {
+        "table": "|@0 000000_01000_00100_01001_00000_100000 // add $t1, $t0, $a0|\n|@4 101011_01011_01001_0000000000000101 // sw $t1, 5($t3)|\n|@8 100011_01011_10010_0000000000000101 // lw $s2, 5($t3)|\n|@c 000000_01000_10011_01001_00000_101010 // slt $t1, $t0, $s3|\n|@10 000100_01001_10010_1111111111111011 // beq $t1, $s2, ­5|",
+        "token": 269
+      },
+      {
+        "table": "||\n|$readmemb(\"program.mbin\", full.path.to.data);|\n||",
+        "token": 17
+      }
+    ]
+  },
+  {
+    "page_num": 8,
+    "content": [
+      {
+        "text": "CC = iverilog \n FLAGS = ­Wall ­Winfloop \n library_input: one.v two.v testbench.v\n $(CC) $(FLAGS) ­o test one.v two.v testbench.v \n vvp test\n gtkwave my_dumpfile.vcd config.gtkw\n",
+        "font-size": 12,
+        "token": 75
+      },
+      {
+        "text": "The makefile should be in the same directory with the other .v, .vcd and .gtkw files in our example.\nYou simply execute this kind of script by just typing make in the terminal.\n  $ make\n",
+        "font-size": 12,
+        "token": 48
+      },
+      {
+        "text": "Now, when you want to run your verilog code you can just type make and everything comes up for\nyou.\n No pain No gain\n",
+        "font-size": 12,
+        "token": 29
+      },
+      {
+        "text": "Now comes the last but the best part. How can you represent the instructions in GTKWave from the\nmoment you have to change them from test to test? It's time consuming. It's also time consuming to\nconvert an instruction to its binary representation in order to test the processor. There are some\nonline converters, but they restrict you in the way that you cannot insert a whole program and get its\nbinary. Furthermore, its boring to fill the file with addresses (@0, @4, …). There are times you\nwant   to   run   a   big   program,   and   you   spend   the   ¾   time   in   converting   it   in   a   format   that\n$readmemb() can read it.\n",
+        "font-size": 12,
+        "token": 157
+      },
+      {
+        "text": "For this reason there's no solution but to develop your own parser. You'll spend a few hours to finish\nit, but the results will save you a lot more hours in the testing of your code. For me I developed a\nMIPS assembly to MIPS binary parser. I named it MASMBIN and works like this: It takes as first\nargument the .masm assembly file (input), and as a second argument the .mbin binary file (output):\n  $ ./masmbin input.masm output.mbin\n In this stage, it can take 2 options:\n ­c\n Shows in .mbin file in comments the parsed instruction\n ­f filter.txt\n Outputs a .txt filter file for GTKWave\n",
+        "font-size": 12,
+        "token": 167
+      },
+      {
+        "table": "|CC = iverilog|\n|FLAGS = ­Wall ­Winfloop|\n||\n|library_input: one.v two.v testbench.v|\n|$(CC) $(FLAGS) ­o test one.v two.v testbench.v|\n||\n|vvp test|\n|gtkwave my_dumpfile.vcd config.gtkw|",
+        "token": 68
+      }
+    ]
+  },
+  {
+    "page_num": 9,
+    "content": [
+      {
+        "text": "So as you see, this parser does another job with the right option: It creates the filter that we wanted\nto represent the values of signals in GTKWave as higher level instructions.\n Now we're going to put everything together and have a nice MIPS assembly simulator.\n Let's start from the conventions you should take:\n •\n In $readmemb(), the file must be the same (for our example, program.mbin)\n • The filter for our instructions in GTKWave should have a stable name (for our example,\n translate_instruction.txt)\n Ok, now lets write our final makefile:\n CC = iverilog \n FLAGS = ­Wall ­Winfloop \n library_input: one.v two.v testbench.v\n $(CC) $(FLAGS) ­o test one.v two.v testbench.v \n ./masmbin ­c ­f translate_instruction.txt program.masm \n program.mbin\n vvp test\n gtkwave my_dumpfile.vcd config.gtkw\n",
+        "font-size": 12,
+        "token": 217
+      },
+      {
+        "text": "Now, everything is in place. You can edit the program.masm file as you want, save it, and execute \nmake. Everything will come up automatically.\n",
+        "font-size": 12,
+        "token": 33
+      },
+      {
+        "text": "If you want to download the new version of MASMBIN you can do so at \nhttps://dl.dropboxusercontent.com/u/63037297/MIPS_asm_to_bin_parser_v2.0.tar.gz.\n",
+        "font-size": 12,
+        "token": 48
+      },
+      {
+        "text": "For the previous version refer to the github repository: \nhttps://github.com/gon1332/MIPS-asm-to-bin-parser\n",
+        "font-size": 12,
+        "token": 29
+      },
+      {
+        "table": "|CC = iverilog|\n|FLAGS = ­Wall ­Winfloop|\n||\n|library_input: one.v two.v testbench.v|\n|$(CC) $(FLAGS) ­o test one.v two.v testbench.v|\n||\n|./masmbin ­c ­f translate_instruction.txt program.masm program.mbin|\n|vvp test|\n|gtkwave my_dumpfile.vcd config.gtkw|",
+        "token": 87
+      }
+    ]
+  }
+]

@@ -26,7 +26,7 @@ class iverilogTool(BaseTool):
          
     def call(self, params,**kwargs) -> str:
        
-        self.binary_path = '/data/zhma/newest/iverilog'
+        self.binary_path = './iverilog/bin/iverilog'
         try:
           
             command = [self.binary_path] + json.loads(params)['arguments']
@@ -46,11 +46,11 @@ files = ['/data/zhma/iverilog_quickstart.pdf']  # Give the bot a PDF file to rea
     
 def app_gui():
     # Define the agent
-    bot = Assistant(llm={'model': 'Qwen2-72B-Instruct','model_server': ' http://192.168.3.57:8000/v1',
-        'api_key': 'EMPTY',},
+    bot = Assistant(llm={ 'model': 'gpt-4o-mini','model_server': ' https://api.openai.com/v1',
+        'api_key': 'your key',},
                     name='iverilog LLM-Agent',
-                    function_list=tools,
-                files=files,
+                    #function_list=tools,
+                #files=files,
                     description='自动调用iverilog工具')
     chatbot_config = {
         'prompt.suggestions': [
@@ -59,7 +59,7 @@ def app_gui():
             },
         ]
     }
-    WebUI(bot, chatbot_config=chatbot_config).run(server_name="0.0.0.0")
+    WebUI(bot, chatbot_config=chatbot_config).run()#server_name="0.0.0.0"
 
 
 if __name__ == '__main__':
